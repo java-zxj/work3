@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC
+        "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.fh.mapper.CommodityMapper">
+
+  <select id="queryCount" parameterType="com.fh.model.Page" resultType="long">
+      select count(*) from sm_commodity
+  </select>
+
+    <select id="queryList" resultType="com.fh.model.Commodity" parameterType="com.fh.model.Page">
+        select * from sm_commodity limit #{start},#{length}
+    </select>
+
+    <insert id="addCommodity" parameterType="com.fh.model.Commodity">
+    insert into sm_commodity (name,price,barCode,stock,imageUrl,producedDate,shelfLife,status)
+    values (#{name},#{price},#{barCode},#{stock},#{imageUrl},#{producedDate},#{shelfLife},#{status})
+    </insert>
+
+    <delete id="deleteCommodity" parameterType="java.lang.Integer">
+        delete from sm_commodity where id = #{id}
+    </delete>
+
+    <select id="getCommodityById"  parameterType="java.lang.Integer" resultType="com.fh.model.Commodity">
+        select * from sm_commodity where id = #{id}
+    </select>
+
+    <update id="updateCommodity" parameterType="com.fh.model.Commodity">
+          update sm_commodity set name = #{name},price=#{price},barCode=#{barCode},
+          imageUrl = #{imageUrl},producedDate = #{producedDate},shelfLife = #{shelfLife},
+          status = #{status} where id = #{id}
+    </update>
+
+
+</mapper>

@@ -1,0 +1,569 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script type="text/javascript" src="/js/jquery-3.4.1.min.js"></script>
+    <link rel="stylesheet" href="/js/layui-master/dist/css/layui.css" media="all">
+    <link rel="stylesheet"
+          href="/js/bootstrap3/css/bootstrap.min.css">
+    <link href="/js/DataTables/DataTables-1.10.18/css/jquery.dataTables.css"rel="stylesheet" type="text/css" />
+    <link rel="stylesheet" href="/js/bootstrap/datetimepicker/bootstrap-datetimepicker.css">
+
+    <script type="text/javascript"src="/js/DataTables/DataTables-1.10.18/js/jquery.dataTables.js"></script>
+    <script type="text/javascript"src="/js/bootstrap3/js/bootstrap.min.js"></script>
+    <script type="text/javascript" src="/js/layui-master/dist/layui.js"></script>
+    <script src="/js/bootstrap/datetimepicker/bootstrap-datetimepicker.js"></script>
+    <link  href="/js/bootstrap3/css/bootstrap.css" rel="stylesheet">
+    <link  href="/js/bootstrap3/css/bootstrap-theme.css" rel="stylesheet">
+    <link  href="/js/bootstrap-datetimepicker/css/bootstrap-datetimepicker.css" rel="stylesheet">
+    <link rel="stylesheet" href="/js/DataTables/DataTables-1.10.18/css/dataTables.bootstrap.css">
+    <link  href="/js/fileinput5/css/fileinput.css" rel="stylesheet">
+    <link href="/js/bootstrap-validator/css/bootstrapValidator.min.css" rel="stylesheet">
+
+    <script src="/js/bootstrap3/js/bootstrap.js"></script>
+    <script src="/js/DataTables/DataTables-1.10.18/js/jquery.dataTables.js"></script>
+    <script src="/js/DataTables/DataTables-1.10.18/js/dataTables.bootstrap.js"></script>
+    <script src="/js/bootstrap-datetimepicker/js/moment-with-locales.js"></script>
+    <script src="/js/bootstrap-datetimepicker/js/bootstrap-datetimepicker.min.js"></script>
+    <script src="/js/bootbox/bootbox.min.js"></script>
+    <script src="/js/fileinput5/js/fileinput.js"></script>
+    <script src="/js/fileinput5/js/locales/zh.js"></script>
+    <script src="/js/bootstrap-validator/js/bootstrapValidator.js"></script>
+    <script src="/js/bootstrap-validator/js/bootstrapValidator.min.js"></script>
+</head>
+
+
+<script type="text/html" id="addCommodity"  >
+    <div>
+        <form class="form-horizontal" id="addFrom">
+        <div class="form-group">
+            <label  class="col-sm-2 control-label">商品名</label>
+            <div class="col-sm-4">
+                <input type="text" class="form-control" id="add_name"  placeholder="商品名">
+            </div>
+        </div>
+        <div class="form-group">
+            <label  class="col-sm-2 control-label">价格</label>
+            <div class="col-sm-4">
+                <input type="text" class="form-control" id="add_price"  placeholder="价格">
+            </div>
+        </div>
+
+            <div class="form-group">
+                <label  class="col-sm-2 control-label">条形码</label>
+                <div class="col-sm-4">
+                    <input type="text" class="form-control" id="add_barCode"  placeholder="条形码">
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label  class="col-sm-2 control-label">库存</label>
+                <div class="col-sm-4">
+                    <input type="text" class="form-control" id="add_stock"  placeholder="库存">
+                </div>
+            </div>
+
+
+            <div class="form-group" style="margin-bottom: 100px">
+                <label  class="col-sm-2 control-label">商品图片</label>
+                <div class="col-sm-5" style="height:300px">
+                    <input id="add-id"  name="file" multiple type="file" data-show-caption="true">
+                    <input type="hidden" name="imageUrl"  id="add_imageUrl">
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label  class="col-sm-2 control-label">生产日期</label>
+                <div class="col-sm-4">
+                    <input type="text"  id="add_producedDate" class="form-control" >
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label  class="col-sm-2 control-label">保质期</label>
+                <div class="col-sm-4">
+                    <input type="text"  id="add_shelfLife" class="form-control" >
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label class="col-sm-2 control-label">状态</label>
+                <div class="col-sm-4">
+                    <div class="input-group">
+                        <label class="radio-inline">
+                            <input type="radio" name="status"  value="1"> 上架
+                        </label>
+                        <label class="radio-inline">
+                            <input type="radio" name="status"  value="2"> 下架
+                        </label>
+                    </div>
+                </div>
+            </div>
+
+
+
+        </form>
+
+    </div>
+</script>
+<!-- 修改 -->
+<script type="text/html" id="updateAccessory"  >
+    <div>
+        <form class="form-horizontal" id="updateFrom">
+            <div class="form-group">
+                <label  class="col-sm-2 control-label">商品名</label>
+                <div class="col-sm-4">
+                    <input type="text" class="form-control" id="update_name"  placeholder="商品名">
+                </div>
+            </div>
+            <div class="form-group">
+                <label  class="col-sm-2 control-label">价格</label>
+                <div class="col-sm-4">
+                    <input type="text" class="form-control" id="update_price"  placeholder="价格">
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label  class="col-sm-2 control-label">条形码</label>
+                <div class="col-sm-4">
+                    <input type="text" class="form-control" id="update_barCode"  placeholder="条形码">
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label  class="col-sm-2 control-label">库存</label>
+                <div class="col-sm-4">
+                    <input type="text" class="form-control" id="update_stock"  placeholder="库存">
+                </div>
+            </div>
+
+
+            <div class="form-group" style="margin-bottom: 100px">
+                <label  class="col-sm-2 control-label">商品图片</label>
+                <div class="col-sm-5" style="height:300px">
+                    <input id="update-id"  name="file" multiple type="file" data-show-caption="true">
+                    <input type="hidden" name="imageUrl"  id="update_imageUrl">
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label  class="col-sm-2 control-label">生产日期</label>
+                <div class="col-sm-4">
+                    <input type="text"  id="update_producedDate" class="form-control" >
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label  class="col-sm-2 control-label">保质期</label>
+                <div class="col-sm-4">
+                    <input type="text"  id="update_shelfLife" class="form-control" >
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label class="col-sm-2 control-label">状态</label>
+                <div class="col-sm-4">
+                    <div class="input-group">
+                        <label class="radio-inline">
+                            <input type="radio" name="status"  value="1"> 上架
+                        </label>
+                        <label class="radio-inline">
+                            <input type="radio" name="status"  value="2"> 下架
+                        </label>
+                    </div>
+                </div>
+            </div>
+
+
+
+        </form>
+
+    </div>
+</script>
+<body>
+<div class="form-group">
+    <div class="col-sm-offset-5 col-sm-7">
+        <button type="button" onclick="toAdd()"  class="btn btn-success"><li class="glyphicon glyphicon-plus">增加商品</li></button>
+    </div>
+</div>
+<div class="panel panel-primary">
+    <div class="panel-body">
+        <div class="bs-example" data-example-id="striped-table">
+            <table id="example" class="table table-striped table-bordered" style="width:100%">
+                <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>商品名称</th>
+                    <th>价格</th>
+                    <th>销量</th>
+                    <th>条形码</th>
+                    <th>库存</th>
+                    <th>商品图片</th>
+                    <th>生产日期</th>
+                    <th>保质期</th>
+                    <th>状态</th>
+                    <th>产地</th>
+                    <th>操作</th>
+                </tr>
+                </thead>
+            </table>
+        </div>
+    </div>
+</div>
+
+</body>
+<script>
+
+    var imgUrl="http://localhost:8000/";
+    var table;
+    $(function(){
+        getPageData();
+    });
+    /* 刷新页面 */
+    function queryList(){
+        $("#example").dataTable().fnDraw(false); //点击事件触发table重新请求服务器
+    }
+    //分页查询
+    function getPageData(){
+        var buttons="";
+        table=$('#example').DataTable({
+            "processing": true,
+            "serverSide": true,//开启服务的模式
+            "searching":false,
+            "ordering":true,
+            "order":[[0,'asc'],[1,'desc']],
+            "aLengthMenu": [3, 5, 20], //更改显示记录数选项
+            "ajax": {
+                "url": "http://localhost:8081/commodity/queryList",
+                "type": "POST",
+                "data": function ( d ) {
+                },
+                dataSrc: function (result) {
+                    if (result.status==200) {
+                        result.draw = result.data.draw;
+                        result.recordsTotal = result.data.recordsTotal;
+                        result.recordsFiltered = result.data.recordsFiltered;
+                        return result.data.data;
+                    }else{
+                        return "";
+                    }
+                }
+            },
+            "columns": [
+                {"data": "id"},
+                {"data": "name"},
+                {"data": "price"},
+                {"data": "sales"},
+                {"data": "barCode"},
+                {"data": "stock"},
+                {"data": "imageUrl",
+                    render:function (data,type,row,meta) {
+                        return "<img src='"+imgUrl+data+"' width='50px' >";
+                    }},
+                {"data": "producedDate",
+                    render:function (data,type,row,meta) {
+                        return new Date(data).toLocaleDateString();
+                    }},
+                {"data": "shelfLife",
+                    render:function (data,type,row,meta) {
+                        return new Date(data).toLocaleDateString();
+                    }},
+                {"data": "status",
+                    render:function (data,type,row,meta) {
+                        return  data==1?"上架":"下架";
+                    }},
+                {"data": "areaId"},
+                {"data" : "id",render:function(data, type, row, meta) {
+                        buttons = '<button type="button" class="btn btn-info" onclick="toUpdate('+data+')" >修改</button>' +
+                            '<button type="button" class="btn btn-danger" onclick="deleteAccessory('+data+')">删除</button>'
+                        return buttons;
+                    }}
+            ],
+            "language": {                              // 这是修改语言的显示
+                buttons: {
+                    pageLength: {
+                        _: "显示%d条",
+                        '-1': "全部显示"
+                    }
+                },
+                paginate: {
+                    first: "首条",
+                    previous: "前一页",
+                    next: "下一页",
+                    last: "末页"
+                },
+                "info": "第_PAGE_页,共_PAGES_页",
+                "infoEmpty": "未找到相关数据",
+                "search": "关键字",
+                "zeroRecords": "未找到相关数据",
+                "decimal": ".",
+                "thousands": ","
+            }
+        })
+    }
+    /* 添加 */
+    function toAdd(){
+        bootbox.dialog({
+            title: "添加附件",
+            message: $("#addCommodity").html(),
+            buttons: {
+                Cancel: {
+                    label: "撤销",
+                    className: "btn-default",
+                    callback: function () {
+                        alert("操作终止");
+                    }
+                }
+                , OK: {
+                    label: "提交",
+                    className: "btn-primary",
+                    callback: function () {
+                        var param = {};
+                        param.name = $("#add_name").val();
+                        param.price = $("#add_price").val();
+                        param.barCode = $("#add_barCode").val();
+                        param.stock = $("#add_stock").val();
+                        param.imageUrl = $("#add_imageUrl").val();
+                        param.shelfLife = $("#add_shelfLife").val();
+                        param.producedDate = $("#add_producedDate").val();
+                        param.status = $("[name='status']:checked").val();
+                        $.post(
+                            "http://localhost:8081/commodity/addCommodity",
+                            param,
+                            function (result) {
+                                if(result.status==200){
+                                    alert("操作完成");
+                                    queryList();
+                                } else {
+                                    bootbox.alert(
+                                        "系统异常，请联系管理员",function() {
+
+                                        }
+                                    )
+                                }
+                            }
+                        )
+                    }
+                }
+            }
+        });
+
+        initAddFileInput();
+        //初始化日期插件
+        initAddDate();
+        initAddDate2();
+    }
+
+    function initAddDate(){
+        $('#add_producedDate').datetimepicker({
+            format:"YYYY-MM-DD",
+            showClear: true
+        });
+    }
+    function initUpdateDate(){
+        $('#update_producedDate').datetimepicker({
+            format:"YYYY-MM-DD",
+            showClear: true
+        });
+    }
+
+    function initAddDate2(){
+        $('#add_shelfLife').datetimepicker({
+            format:"YYYY-MM-DD",
+            showClear: true
+        });
+    }
+    function initUpdateDate2(){
+        $('#update_shelfLife').datetimepicker({
+            format:"YYYY-MM-DD",
+            showClear: true
+        });
+    }
+
+    /* 修改 */
+    function toUpdate(id){
+       // alert(id)
+        window.event.stopPropagation();// 阻止冒泡
+        bootbox.dialog({
+            title: "修改附件",
+            message: $("#updateAccessory").html(),
+            buttons: {
+                Cancel: {
+                    label: "撤销",
+                    className: "btn-default",
+                    callback: function () {
+                        alert("操作终止");
+                    }
+                }
+                , OK: {
+                    label: "提交",
+                    className: "btn-primary",
+                    callback: function () {
+                        var param = {};
+                        param.id = id;
+                        param.name = $("#update_name").val();
+                        param.price = $("#update_price").val();
+                        param.imageUrl = $("#update_imageUrl").val();
+                        param.barCode = $("#update_barCode").val();
+                        param.producedDate = $("#update_producedDate").val();
+                        param.shelfLife = $("#update_shelfLife").val();
+                        param.stock = $("#update_stock").val();
+                        param.status = $("[name='status']:checked").val();
+                        $.post(
+                            "http://localhost:8081/commodity/updateCommodity",
+                            param,
+                            function (result) {
+                                if(result.status==200){
+                                    alert("操作完成");
+                                    queryList();
+                                } else {
+                                    bootbox.alert(
+                                        "系统异常，请联系管理员",function() {
+                                        }
+                                    )
+                                }
+                            }
+                        )
+                    }
+                }
+            }
+        });
+        queryList();
+        initUpdateDate();
+        initUpdateDate2();
+        $.post(
+            "http://localhost:8081/commodity/getCommodityById",
+            {"id":id},
+            function(result){
+                if(result.status==200) {
+                    var data = result.data;
+                   $("#update_name").val(data.name);
+                   $("#update_price").val(data.price);
+                   $("#update_stock").val(data.stock);
+                   $("#update_shelfLife").val(data.shelfLife);
+                   $("#update_producedDate").val(data.producedDate);
+                   $("#update_barCode").val(data.barCode);
+                   $("#update_imageUrl").val(data.imageUrl);
+                    $("[name='status'][value='"+data.status+"']").attr("checked",true);
+                    initUpdateFileInput();
+                }
+            }
+        );
+    }
+
+    /*删除*/
+    function deleteAccessory(id){
+        window.event.stopPropagation()// 阻止冒泡
+        bootbox.dialog({
+            message: "确认删除",
+            title: "提示信息",
+            buttons: {
+                Cancel: {
+                    label: "取消",
+                    className: "btn-default",
+                    callback: function () {
+
+                    }
+                }
+                , OK: {
+                    label: "确认",
+                    className: "btn-danger",
+                    callback: function () {
+                        $.post(
+                            "http://localhost:8081/commodity/deleteCommodity",
+                            {"id":id},
+                            function(data){
+                                    queryList();
+                            }
+                        )
+                    }
+                }
+            }
+        });
+    }
+
+    //增加时上传图片
+    function initAddFileInput() {
+
+        $("#add-id").fileinput({
+            language: 'zh', //设置语言
+            uploadUrl: "http://localhost:8081/photoUploadByFtp", //上传的地址
+            allowedFileExtensions: ['jpg', 'gif', 'png','exe','mp4'],//接收的文件后缀
+            //uploadExtraData:{"id": 1, "fileName":'123.mp3'},
+            uploadAsync: true, //默认异步上传
+            showUpload: true, //是否显示上传按钮
+            showRemove : true, //显示移除按钮
+            showPreview : true, //是否显示预览
+            showCaption: false,//是否显示标题
+            browseClass: "btn btn-primary", //按钮样式
+            //dropZoneEnabled: true,//是否显示拖拽区域
+            //minImageWidth: 50, //图片的最小宽度
+            //minImageHeight: 50,//图片的最小高度
+            //maxImageWidth: 1000,//图片的最大宽度
+            //maxImageHeight: 1000,//图片的最大高度
+            //maxFileSize: 0,//单位为kb，如果为0表示不限制文件大小
+            //minFileCount: 0,
+            maxFileCount: 10, //表示允许同时上传的最大文件个数
+            enctype: 'multipart/form-data',
+            validateInitialCount:true,
+            previewFileIcon: "<i class='glyphicon glyphicon-cloud'></i>",
+            msgFilesTooMany: "选择上传的文件数量({n}) 超过允许的最大数值{m}！",
+            layoutTemplates :{
+                //actionDelete:'', //去除上传预览的缩略图中的删除图标
+                //actionUpload:'',//去除上传预览缩略图中的上传图片；
+                //actionZoom:''   //去除上传预览缩略图中的查看详情预览的缩略图标。
+            }
+        }).on("fileuploaded", function (event, data, previewId, index) {    //一个文件上传成功
+            console.log('文件上传成功！');
+            console.log(data);
+            $("#add_accessoryPath").val(data.response.filePath);
+
+        })
+    }
+    //修改时上传图片
+    function initUpdateFileInput() {
+        var filePath = $("#update_imageUrl").val();
+        $("#update-id").fileinput({
+            language: 'zh', //设置语言
+            uploadUrl: "http://localhost:8081/photoUploadByFtp", //上传的地址
+            allowedFileExtensions: ['jpg', 'gif', 'png','exe','mp4'],//接收的文件后缀
+            //uploadExtraData:{"id": 1, "fileName":'123.mp3'},
+            uploadAsync: true, //默认异步上传
+            showUpload: true, //是否显示上传按钮
+            showRemove : true, //显示移除按钮
+            showPreview : true, //是否显示预览
+            showCaption: false,//是否显示标题
+            browseClass: "btn btn-primary", //按钮样式
+            //dropZoneEnabled: true,//是否显示拖拽区域
+            //minImageWidth: 50, //图片的最小宽度
+            //minImageHeight: 50,//图片的最小高度
+            //maxImageWidth: 1000,//图片的最大宽度
+            //maxImageHeight: 1000,//图片的最大高度
+            //maxFileSize: 0,//单位为kb，如果为0表示不限制文件大小
+            //minFileCount: 0,
+            maxFileCount: 10, //表示允许同时上传的最大文件个数
+            enctype: 'multipart/form-data',
+            validateInitialCount:true,
+            previewFileIcon: "<i class='glyphicon glyphicon-cloud'></i>",
+            msgFilesTooMany: "选择上传的文件数量({n}) 超过允许的最大数值{m}！",
+            layoutTemplates :{
+                //actionDelete:'', //去除上传预览的缩略图中的删除图标
+                //actionUpload:'',//去除上传预览缩略图中的上传图片；
+                //actionZoom:''   //去除上传预览缩略图中的查看详情预览的缩略图标。
+            },
+            initialPreview: [
+                //"<img src='<%=request.getContextPath()%>/"+filePath+"' class='file-preview-image' alt='Desert' title='Desert'>",
+                "<img src='"+imgUrl+""+filePath+"' class='file-preview-image' style='width:100px'>"
+            ],
+        }).on("fileuploaded", function (event, data, previewId, index) {    //一个文件上传成功
+            console.log('文件上传成功！');
+            console.log(data);
+            $("#update_imageUrl").val(data.response.filePath);
+
+        })
+    }
+
+
+</script>
+</html>
